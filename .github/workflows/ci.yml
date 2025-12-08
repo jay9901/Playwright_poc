@@ -6,9 +6,11 @@ name: CI - Playwright Tests
 
 on:
   push:
-    branches: [ main ]
+    branches: 
+      - Playwright/new-tests  
   pull_request:
-    branches: [ main ]
+    branches: 
+      - Playwright/new-tests
   schedule:
     - cron: '0 2 * * *'    # daily at 02:00 UTC (adjust as needed)
   workflow_dispatch: {}    # manual trigger
