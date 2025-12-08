@@ -11,8 +11,8 @@ on:
   pull_request:
     branches: 
       - Playwright/new-tests
-  schedule:
-    - cron: '0 2 * * *'    # daily at 02:00 UTC (adjust as needed)
+  # schedule:
+  #   - cron: '0 2 * * *'    # daily at 02:00 UTC (adjust as needed)
   workflow_dispatch: {}    # manual trigger
 
 jobs:
