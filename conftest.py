@@ -10,16 +10,20 @@ from pathlib import Path
 import pytest
 from playwright.sync_api import Error as PlaywrightError, Page, Playwright, Browser, BrowserContext
 
+@pytest.fixture(scope="session")
+def credentials():
+    return {
+        "valid_user": "standard_user",
+        "valid_password": "secret_sauce",
+        "invalid_user": "wrong_user",
+        "invalid_password": "wrong_pass",
+    }
+
 def pytest_sessionstart(session):
-    """
-    Runs once before ANY test.
-    Cleans the screenshots folder to ensure fresh execution.
-    """
-    screenshots_dir = Path(session.config.rootpath) / "screenshots"
-    if screenshots_dir.exists():
-        shutil.rmtree(screenshots_dir)
-        print("🧹 Old screenshots removed.")
-    screenshots_dir.mkdir(parents=True, exist_ok=True)
+    screenshots = Path(session.config.rootpath) / "screenshots"
+    if screenshots.exists():
+        shutil.rmtree(screenshots)
+    screenshots.mkdir()
     print("📁 Fresh screenshot folder created.")
 
 # Provide a simple CLI flag to run browsers in headless mode
